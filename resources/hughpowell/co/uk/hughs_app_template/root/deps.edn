@@ -1,0 +1,17 @@
+{:paths   ["src" "resources"]
+ :deps    {org.clojure/clojure   {:mvn/version "1.10.3"}
+           aero/aero             {:mvn/version "1.1.6"}
+           integrant/integrant   {:mvn/version "0.8.0"}
+           meta-merge/meta-merge {:mvn/version "1.0.0"}}
+ :aliases {:run-m {:main-opts ["-m" "{{main/ns}}"]}
+           :run-x {:ns-default {{main/ns}}
+                   :exec-fn foo
+                   :exec-args {:name "Clojure"}}
+           :dev   {:extra-paths ["dev"]
+                   :extra-deps  {integrant/repl {:mvn/version "0.3.2"}}}
+           :test  {:extra-paths ["test"]
+                   :extra-deps  {org.clojure/test.check {:mvn/version "1.1.1"}
+                                 lambdaisland/kaocha    {:mvn/version "1.62.993"}}
+                   :main-opts   ["-m" "kaocha.runner"]}
+           :build {:deps       {io.github.seancorfield/build-clj {:git/tag "v0.6.7" :git/sha "22c2d09"}}
+                   :ns-default build}}}
